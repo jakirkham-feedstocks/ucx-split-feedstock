@@ -2,8 +2,8 @@
 {% set ucx_proc_version = "1.0.0" %}
 {% set ucx_commit = "9275db5" %}  # from Akshay's ucx-cuda branch
 {% set ucx_py_version = "0.1.0.dev" %}
-{% set ucx_py_commit = "7d37e7e" %}  # from rapidsai's devel branch
-{% set number = "2" %}
+{% set ucx_py_commit = "c93687a" %}  # from rapidsai's devel branch
+{% set number = "3" %}
 
 {% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
 
@@ -103,6 +103,9 @@ outputs:
         - ucp
     about:
       home: https://github.com/rapidsai/ucx-py
+      license: BSD-3-Clause
+      license_family: BSD
+      license_file: ucx-py/LICENSE
       summary: Python bindings for UCX
 
 about:
