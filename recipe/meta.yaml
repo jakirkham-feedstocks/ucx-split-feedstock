@@ -2,7 +2,7 @@
 {% set ucx_proc_version = "1.0.0" %}
 {% set ucx_commit = "7cf55ac" %}  # from Akshay's ucx-cuda branch
 {% set ucx_py_version = "0.1.0.dev" %}
-{% set ucx_py_commit = "c93687a" %}  # from rapidsai's devel branch
+{% set ucx_py_commit = "6ba3173" %}  # from rapidsai's devel branch
 {% set number = "3" %}
 
 {% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
@@ -101,6 +101,7 @@ outputs:
         - ucx
       run:
         - python
+        - numpy
         - {{ pin_subpackage("ucx", exact=True) }}
       run_constrained:
         - ucx-proc * {{ ucx_proc_type }}
