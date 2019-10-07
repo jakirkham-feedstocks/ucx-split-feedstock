@@ -1,0 +1,8 @@
+source:
+  - git_url: https://github.com/rapidsai/ucx-py
+    git_rev: eba2cd6
+    folder: ucx-py
+
+outputs:
+  - name: ucx-py
+    version: "0.1+37.geba2cd6"
