@@ -84,7 +84,6 @@ outputs:
     build:
       number: {{ number }}
       skip: true  # [py<36]
-      string: "py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ number }}_{{ ucx_proc_type }}"
     requirements:
       build:
         - {{ compiler("c") }}
