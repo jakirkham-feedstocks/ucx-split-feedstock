@@ -1,3 +1,4 @@
+libmlx5
 libibcm-devel
 libibverbs-devel
 librdmacm-devel
