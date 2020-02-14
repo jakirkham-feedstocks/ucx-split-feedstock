@@ -18,6 +18,7 @@ fi
     --enable-numa \
     --with-gnu-ld \
     --with-cm \
+    --with-mlx5-dv \
     --with-rdmacm \
     --with-verbs \
     ${CUDA_CONFIG_ARG}
