@@ -1,6 +1,6 @@
 {% set ucx_version = "1.9.0" %}
 {% set ucx_proc_version = "1.0.0" %}
-{% set number = "0" %}
+{% set number = "1" %}
 
 {% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
 
@@ -81,3 +81,4 @@ extra:
     - jakirkham
     - quasiben
     - TomAugspurger
+    - leofang
