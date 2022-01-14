@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: 36d0f6b8a7948361082f65be67b4c6336ebf2db62d717f253206ec7276a29086
+  sha256: e26d1696912cc4a005b93cd7fe61a8d8195e6e61bd5ded47fd232b29f6c94b8b
 
 build:
   skip: true  # [not linux]
