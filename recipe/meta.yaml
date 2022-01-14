@@ -1,6 +1,6 @@
-{% set ucx_version = "1.9.0" %}
+{% set ucx_version = "1.12.0" %}
 {% set ucx_proc_version = "1.0.0" %}
-{% set number = "1" %}
+{% set number = "0" %}
 
 {% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
 
@@ -14,7 +14,7 @@ source:
 
 build:
   skip: true  # [not linux]
-  number: 2
+  number: 0
 
 outputs:
   - name: ucx-proc
@@ -74,6 +74,7 @@ about:
   license_family: BSD
   license_file: LICENSE
   summary: Unified Communication X.
+  doc_url: https://openucx.readthedocs.io/
 
 extra:
   recipe-maintainers:
