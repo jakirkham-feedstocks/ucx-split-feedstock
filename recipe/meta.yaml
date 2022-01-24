@@ -53,8 +53,12 @@ outputs:
         - make
         - pkg-config
       host:
+      run:
+        - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
+        - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
       run_constrained:
         - ucx-proc * {{ ucx_proc_type }}
+        
     script: install_ucx.sh
     test:
       commands:
