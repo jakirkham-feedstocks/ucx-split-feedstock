@@ -1,7 +1,7 @@
 About ucx-split
 ===============
 
-Home: https://github.com/openucx/ucx
+Home: https://openucx.org
 
 Package license: BSD-3-Clause
 
