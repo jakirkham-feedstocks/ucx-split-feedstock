@@ -65,7 +65,7 @@ outputs:
         # Requires driver for GPU test.
         - ${PREFIX}/bin/ucx_info -v         # [cuda_compiler_version == "None"]
     about:
-      home: https://github.com/openucx/ucx
+      home: https://openucx.org
       license: BSD-3-Clause
       license_family: BSD
       license_file: LICENSE
