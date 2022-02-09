@@ -6,9 +6,9 @@ EXTRA_ARGS=""
 if [ "${cuda_compiler_version}" != "None" ]; then
     EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
-if [ "${cdt_name}" == "cos6" ]; then
-    EXTRA_ARGS="${EXTRA_ARGS} --with-cm"
-fi
+
+
+# --with-rdmacm requires rdma-core v23+, while CentOS 7 only offers v22.
 
 ./autogen.sh
 ./configure \
@@ -20,9 +20,9 @@ fi
     --enable-mt \
     --enable-numa \
     --with-gnu-ld \
-    --with-rdmacm \
     --with-verbs \
-    ${EXTRA_ARGS}
+    ${EXTRA_ARGS} || { cat config.log; exit 1; }
+
 
 make -j${CPU_COUNT}
 make install
