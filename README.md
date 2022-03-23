@@ -9,6 +9,10 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ucx-split-feeds
 
 Summary: Unified Communication X.
 
+Development: https://github.com/openucx/ucx
+
+Documentation: https://openucx.readthedocs.io/
+
 Current build status
 ====================
 

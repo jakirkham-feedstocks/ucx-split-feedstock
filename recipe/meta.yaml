@@ -72,6 +72,8 @@ outputs:
       license_family: BSD
       license_file: LICENSE
       summary: Unified Communication X.
+      dev_url: https://github.com/openucx/ucx
+      doc_url: https://openucx.readthedocs.io/
 
 about:
   home: https://github.com/openucx/ucx
