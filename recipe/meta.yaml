@@ -11,6 +11,8 @@ package:
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
   sha256: 9bef31aed0e28bf1973d28d74d9ac4f8926c43ca3b7010bd22a084e164e31b71
+  patches:
+    - 8060.patch  # Likely unnecessary after 1.12.1
 
 build:
   skip: true  # [not linux]

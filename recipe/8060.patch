@@ -1,0 +1,33 @@
+From 00dbe3a5fe1961a9c671d80e7af83cbe8e23f490 Mon Sep 17 00:00:00 2001
+From: Matthias Diener <mdiener@illinois.edu>
+Date: Wed, 23 Mar 2022 12:46:01 -0500
+Subject: [PATCH] Fix HAVE_DECL_GETAUXVAL ifdefs
+
+HAVE_DECL_GETAUXVAL will be defined to zero if it
+is not available.
+---
+ src/ucm/util/reloc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/ucm/util/reloc.c b/src/ucm/util/reloc.c
+index de890bf19e5..a5a092c4da9 100644
+--- a/src/ucm/util/reloc.c
++++ b/src/ucm/util/reloc.c
+@@ -29,7 +29,7 @@
+ #include <link.h>
+ #include <limits.h>
+ 
+-#ifdef HAVE_DECL_GETAUXVAL
++#if HAVE_DECL_GETAUXVAL
+ #include <sys/auxv.h>
+ #endif
+ 
+@@ -121,7 +121,7 @@ static ucs_status_t ucm_reloc_get_aux_phsize(int *phsize_p)
+         return UCS_OK;
+     }
+ 
+-#ifdef HAVE_DECL_GETAUXVAL
++#if HAVE_DECL_GETAUXVAL
+     phsize = getauxval(AT_PHENT);
+     if (phsize > 0) {
+         *phsize_p = phsize;
