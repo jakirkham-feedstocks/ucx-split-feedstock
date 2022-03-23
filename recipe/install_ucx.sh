@@ -24,5 +24,8 @@ fi
     ${EXTRA_ARGS} || { cat config.log; exit 1; }
 
 
+cat config.log
+
+
 make -j${CPU_COUNT}
 make install
