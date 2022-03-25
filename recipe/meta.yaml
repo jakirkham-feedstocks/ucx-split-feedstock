@@ -67,7 +67,8 @@ outputs:
       commands:
         - test -f "${PREFIX}/bin/ucx_info"
         # Requires driver for GPU test.
-        - ${PREFIX}/bin/ucx_info -v         # [cuda_compiler_version == "None"]
+        # Crashes qemu on ppc64le.
+        - ${PREFIX}/bin/ucx_info -v         # [cuda_compiler_version == "None" and not ppc64le]
     about:
       home: https://openucx.org
       license: BSD-3-Clause
