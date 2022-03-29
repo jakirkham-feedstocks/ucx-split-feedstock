@@ -1,4 +1,4 @@
-{% set ucx_version = "1.12.0" %}
+{% set ucx_version = "1.12.1" %}
 {% set ucx_proc_version = "1.0.0" %}
 {% set number = "0" %}
 
@@ -10,7 +10,9 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: e26d1696912cc4a005b93cd7fe61a8d8195e6e61bd5ded47fd232b29f6c94b8b
+  sha256: 9bef31aed0e28bf1973d28d74d9ac4f8926c43ca3b7010bd22a084e164e31b71
+  patches:
+    - 8060.patch  # Likely unnecessary after 1.12.1
 
 build:
   skip: true  # [not linux]
@@ -35,6 +37,8 @@ outputs:
     version: {{ ucx_version }}
     build:
       number: {{ number }}
+      run_exports:
+        - {{ pin_subpackage("ucx", max_pin="x.x") }}
     requirements:
       build:
         - {{ compiler("c") }}
@@ -71,6 +75,8 @@ outputs:
       license_family: BSD
       license_file: LICENSE
       summary: Unified Communication X.
+      dev_url: https://github.com/openucx/ucx
+      doc_url: https://openucx.readthedocs.io/
 
 about:
   home: https://github.com/openucx/ucx
