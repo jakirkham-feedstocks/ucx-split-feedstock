@@ -1,5 +1,2 @@
-libibcm-devel
-libibverbs-devel
-librdmacm-devel
 numactl-devel
 rdma-core-devel
