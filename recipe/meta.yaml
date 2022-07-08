@@ -1,6 +1,6 @@
-{% set ucx_version = "1.12.1" %}
+{% set ucx_version = "1.13.0" %}
 {% set ucx_proc_version = "1.0.0" %}
-{% set number = "1" %}
+{% set number = "0" %}
 
 {% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
 
@@ -10,9 +10,7 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: 9bef31aed0e28bf1973d28d74d9ac4f8926c43ca3b7010bd22a084e164e31b71
-  patches:
-    - 8060.patch  # Likely unnecessary after 1.12.1
+  sha256: 67593c688691a6cb29be69f60d60e64e9511dea6f9515b2dfc7f2993ee3bbe15
 
 build:
   skip: true  # [not linux]
