@@ -11,7 +11,7 @@ fi
 # --with-rdmacm requires rdma-core v23+, while CentOS 7 only offers v22.
 
 ./autogen.sh
-./configure \
+./contrib/configure-release \
     --build="${BUILD}" \
     --host="${HOST}" \
     --prefix="${PREFIX}" \
