@@ -1,4 +1,4 @@
-{% set ucx_version = "1.13.1" %}
+{% set ucx_version = "1.14.0" %}
 {% set ucx_proc_version = "1.0.0" %}
 {% set number = "1" %}
 
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: c1741f2e08374b033ea82382c6ec9c4f73ede31205c107386648c098545a003d
+  sha256: 9bd95e2059de5dece9dddd049aacfca3d21bfca025748a6a0b1be4486e28afdd
 
 build:
   skip: true  # [not linux]
