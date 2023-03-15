@@ -1,8 +1,5 @@
 {% set ucx_version = "1.14.0" %}
-{% set ucx_proc_version = "1.0.0" %}
 {% set number = "0" %}
-
-{% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
 
 
 package:
@@ -17,20 +14,6 @@ build:
   number: 0
 
 outputs:
-  - name: ucx-proc
-    version: {{ ucx_proc_version }}
-    build:
-      number: 3
-      string: "{{ ucx_proc_type }}"
-    test:
-      commands:
-        - exit 0
-    about:
-      home: https://github.com/conda-forge/ucx-feedstock
-      license: BSD-3-Clause
-      license_family: BSD
-      summary: A meta-package to select CPU or GPU UCX build.
-
   - name: ucx
     version: {{ ucx_version }}
     build:
@@ -57,11 +40,10 @@ outputs:
         - pkg-config
       host:
       run:
-        - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
-        - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
         - libnuma
       run_constrained:
-        - ucx-proc * {{ ucx_proc_type }}
+        - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
+        - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
     script: install_ucx.sh
     test:
       commands:
