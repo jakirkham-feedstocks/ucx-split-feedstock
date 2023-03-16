@@ -38,7 +38,6 @@ outputs:
       host:
         - libnuma
       run:
-        - libnuma
       run_constrained:
         - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
         - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
