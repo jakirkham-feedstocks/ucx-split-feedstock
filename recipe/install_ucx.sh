@@ -20,7 +20,6 @@ fi
     --enable-mt \
     --enable-numa \
     --with-gnu-ld \
-    --with-verbs \
     ${EXTRA_ARGS} || { cat config.log; exit 1; }
 
 
