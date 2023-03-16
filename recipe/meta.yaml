@@ -10,7 +10,7 @@ source:
   sha256: e4ac6561d59653a738f0b73b20f946dd05fa2288ea954659f4a7b6020f994444
 
 build:
-  skip: true  # [not linux]
+  skip: true  # [not linux or cuda_compiler_version == "None"]
   number: {{ number }}
 
 outputs:
