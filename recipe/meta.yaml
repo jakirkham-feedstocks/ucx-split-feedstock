@@ -33,10 +33,10 @@ outputs:
         - automake
         - autoconf
         - libtool
-        - libnuma
         - make
         - pkg-config
       host:
+        - libnuma
       run:
         - libnuma
       run_constrained:
