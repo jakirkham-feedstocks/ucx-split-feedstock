@@ -1,11 +1,26 @@
+About ucx-split-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ucx-split-feedstock/blob/main/LICENSE.txt)
+
 About ucx-split
-===============
+---------------
+
+Home: https://github.com/openucx/ucx
+
+Package license: BSD-3-Clause
+
+Summary: Unified Communication X.
+
+Development: https://github.com/openucx/ucx
+
+Documentation: https://openucx.readthedocs.io/
+About ucx
+---------
 
 Home: https://openucx.org
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ucx-split-feedstock/blob/main/LICENSE.txt)
 
 Summary: Unified Communication X.
 
@@ -52,13 +67,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version11cdt_namecos6cuda_compiler_versionNonecxx_compiler_version11</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cdt_namecos6cuda_compiler_versionNonecxx_compiler_version11" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_64_c_compiler_version7cdt_namecos6cuda_compiler_version10.2cxx_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
@@ -80,24 +88,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_c_compiler_version11cuda_compiler_versionNonecxx_compiler_version11</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compiler_versionNonecxx_compiler_version11" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_ppc64le_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_c_compiler_version11cuda_compiler_versionNonecxx_compiler_version11</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version11cuda_compiler_versionNonecxx_compiler_version11" alt="variant">
                 </a>
               </td>
             </tr>
@@ -114,7 +108,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ucx-green.svg)](https://anaconda.org/conda-forge/ucx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ucx.svg)](https://anaconda.org/conda-forge/ucx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ucx.svg)](https://anaconda.org/conda-forge/ucx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ucx.svg)](https://anaconda.org/conda-forge/ucx) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-ucx--proc-green.svg)](https://anaconda.org/conda-forge/ucx-proc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ucx-proc.svg)](https://anaconda.org/conda-forge/ucx-proc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ucx-proc.svg)](https://anaconda.org/conda-forge/ucx-proc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ucx-proc.svg)](https://anaconda.org/conda-forge/ucx-proc) |
 
 Installing ucx-split
 ====================
@@ -126,16 +119,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `ucx, ucx-proc` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `ucx` can be installed with `conda`:
 
 ```
-conda install ucx ucx-proc
+conda install ucx
 ```
 
 or with `mamba`:
 
 ```
-mamba install ucx ucx-proc
+mamba install ucx
 ```
 
 It is possible to list all of the versions of `ucx` available on your platform with `conda`:

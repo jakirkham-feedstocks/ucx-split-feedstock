@@ -1,8 +1,5 @@
-{% set ucx_version = "1.13.1" %}
-{% set ucx_proc_version = "1.0.0" %}
-{% set number = "1" %}
-
-{% set ucx_proc_type = "cpu" if cuda_compiler_version == "None" else "gpu" %}
+{% set ucx_version = "1.14.0" %}
+{% set number = "0" %}
 
 
 package:
@@ -10,33 +7,21 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: c1741f2e08374b033ea82382c6ec9c4f73ede31205c107386648c098545a003d
+  sha256: e4ac6561d59653a738f0b73b20f946dd05fa2288ea954659f4a7b6020f994444
 
 build:
-  skip: true  # [not linux]
-  number: 0
+  skip: true  # [not linux or cuda_compiler_version == "None"]
+  number: {{ number }}
 
 outputs:
-  - name: ucx-proc
-    version: {{ ucx_proc_version }}
-    build:
-      number: 3
-      string: "{{ ucx_proc_type }}"
-    test:
-      commands:
-        - exit 0
-    about:
-      home: https://github.com/conda-forge/ucx-feedstock
-      license: BSD-3-Clause
-      license_family: BSD
-      summary: A meta-package to select CPU or GPU UCX build.
-
   - name: ucx
     version: {{ ucx_version }}
     build:
       number: {{ number }}
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
+      ignore_run_exports_from:
+        - {{ compiler("cuda") }}
     requirements:
       build:
         - {{ compiler("c") }}
@@ -44,22 +29,18 @@ outputs:
         - {{ compiler("cuda") }}         # [cuda_compiler_version != "None"]
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
-        - {{ cdt("libibcm-devel") }}     # [cdt_name == "cos6"]
-        - {{ cdt("libibverbs-devel") }}  # [cdt_name == "cos6"]
-        - {{ cdt("librdmacm-devel") }}   # [cdt_name == "cos6"]
         - {{ cdt("numactl-devel") }}
-        - {{ cdt("rdma-core-devel") }}   # [cdt_name == "cos7"]
         - automake
         - autoconf
         - libtool
         - make
         - pkg-config
       host:
+        - libnuma
       run:
+      run_constrained:
         - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
         - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
-      run_constrained:
-        - ucx-proc * {{ ucx_proc_type }}
     script: install_ucx.sh
     test:
       commands:
