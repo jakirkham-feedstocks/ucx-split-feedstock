@@ -29,7 +29,6 @@ outputs:
         - {{ compiler("cuda") }}         # [cuda_compiler_version != "None"]
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
-        - {{ cdt("numactl-devel") }}
         - automake
         - autoconf
         - libtool
