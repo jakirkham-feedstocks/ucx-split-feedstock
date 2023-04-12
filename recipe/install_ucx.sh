@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 EXTRA_ARGS=""
 if [ "${cuda_compiler_version}" != "None" ]; then
-    EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
+    EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${PREFIX}"
 fi
 
 
