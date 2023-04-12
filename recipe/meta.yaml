@@ -33,7 +33,7 @@ outputs:
         - cuda-cudart-static ={{ cuda_compiler_version }}
         - cuda-driver-dev ={{ cuda_compiler_version }}
         - cuda-nvcc ={{ cuda_compiler_version }}
-        - cuda-nvml-devel ={{ cuda_compiler_version }}
+        - cuda-nvml-dev ={{ cuda_compiler_version }}
         - automake
         - autoconf
         - libtool
@@ -45,7 +45,7 @@ outputs:
         - cuda-cudart-static ={{ cuda_compiler_version }}
         - cuda-driver-dev ={{ cuda_compiler_version }}
         - cuda-nvcc ={{ cuda_compiler_version }}
-        - cuda-nvml-devel ={{ cuda_compiler_version }}
+        - cuda-nvml-dev ={{ cuda_compiler_version }}
         - libnuma
       run:
     script: install_ucx.sh
