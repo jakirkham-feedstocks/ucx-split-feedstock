@@ -26,10 +26,12 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - {{ compiler("cuda") }}         # [cuda_compiler_version != "None"]
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
         - {{ cdt("numactl-devel") }}
+        - cuda-cudart ={{ cuda_compiler_version }}
+        - cuda-cudart-dev ={{ cuda_compiler_version }}
+        - cuda-cudart-static ={{ cuda_compiler_version }}
         - automake
         - autoconf
         - libtool
@@ -39,8 +41,9 @@ outputs:
         - libnuma
       run:
       run_constrained:
-        - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
-        - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
+        - cuda-cudart ={{ cuda_compiler_version }}
+        - cuda-cudart-dev ={{ cuda_compiler_version }}
+        - cuda-cudart-static ={{ cuda_compiler_version }}
     script: install_ucx.sh
     test:
       commands:
