@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
   sha256: e4ac6561d59653a738f0b73b20f946dd05fa2288ea954659f4a7b6020f994444
+  patches:
+    - cuda12.patch
 
 build:
   skip: true  # [not linux or cuda_compiler_version == "None"]
