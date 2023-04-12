@@ -38,6 +38,9 @@ outputs:
         - make
         - pkg-config
       host:
+        - cuda-cudart ={{ cuda_compiler_version }}
+        - cuda-cudart-dev ={{ cuda_compiler_version }}
+        - cuda-cudart-static ={{ cuda_compiler_version }}
         - libnuma
       run:
       run_constrained:
