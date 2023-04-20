@@ -42,6 +42,8 @@ outputs:
         - make
         - pkg-config
       host:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
         - cuda-cudart ={{ cuda_compiler_version }}
         - cuda-cudart-dev ={{ cuda_compiler_version }}
         - cuda-cudart-static ={{ cuda_compiler_version }}
