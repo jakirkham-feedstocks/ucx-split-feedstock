@@ -28,14 +28,15 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
+        - {{ compiler("cuda") }}         # [cuda_compiler_version != "12.*"]
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
-        - cuda-cudart ={{ cuda_compiler_version }}
-        - cuda-cudart-dev ={{ cuda_compiler_version }}
-        - cuda-cudart-static ={{ cuda_compiler_version }}
-        - cuda-driver-dev ={{ cuda_compiler_version }}
-        - cuda-nvcc ={{ cuda_compiler_version }}
-        - cuda-nvml-dev ={{ cuda_compiler_version }}
+        - cuda-cudart ={{ cuda_compiler_version }}        # [cuda_compiler_version == "12.*"]
+        - cuda-cudart-dev ={{ cuda_compiler_version }}    # [cuda_compiler_version == "12.*"]
+        - cuda-cudart-static ={{ cuda_compiler_version }} # [cuda_compiler_version == "12.*"]
+        - cuda-driver-dev ={{ cuda_compiler_version }}    # [cuda_compiler_version == "12.*"]
+        - cuda-nvcc ={{ cuda_compiler_version }}          # [cuda_compiler_version == "12.*"]
+        - cuda-nvml-dev ={{ cuda_compiler_version }}      # [cuda_compiler_version == "12.*"]
         - automake
         - autoconf
         - libtool
@@ -44,12 +45,12 @@ outputs:
       host:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - cuda-cudart ={{ cuda_compiler_version }}
-        - cuda-cudart-dev ={{ cuda_compiler_version }}
-        - cuda-cudart-static ={{ cuda_compiler_version }}
-        - cuda-driver-dev ={{ cuda_compiler_version }}
-        - cuda-nvcc ={{ cuda_compiler_version }}
-        - cuda-nvml-dev ={{ cuda_compiler_version }}
+        - cuda-cudart ={{ cuda_compiler_version }}        # [cuda_compiler_version == "12.*"]
+        - cuda-cudart-dev ={{ cuda_compiler_version }}    # [cuda_compiler_version == "12.*"]
+        - cuda-cudart-static ={{ cuda_compiler_version }} # [cuda_compiler_version == "12.*"]
+        - cuda-driver-dev ={{ cuda_compiler_version }}    # [cuda_compiler_version == "12.*"]
+        - cuda-nvcc ={{ cuda_compiler_version }}          # [cuda_compiler_version == "12.*"]
+        - cuda-nvml-dev ={{ cuda_compiler_version }}      # [cuda_compiler_version == "12.*"]
         - libnuma
       run:
     script: install_ucx.sh
