@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 EXTRA_ARGS=""
 
-if [ "${cuda_compiler_version}" =~ 12.* ]; then
+if [[ "${cuda_compiler_version}" =~ 12.* ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${PREFIX}"
 
   [[ ${target_platform} == "linux-64" ]] && targetsDir="targets/x86_64-linux"
@@ -12,7 +12,7 @@ if [ "${cuda_compiler_version}" =~ 12.* ]; then
   [[ ${target_platform} == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
 
   export CFLAGS="${CFLAGS} -I${PREFIX}/${targetsDir}/include -L${PREFIX}/${targetsDir}/lib/stubs"
-elif [ "${cuda_compiler_version}" != "None" ]; then
+elif [[ "${cuda_compiler_version}" != "None" ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
 
