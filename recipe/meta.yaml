@@ -1,5 +1,5 @@
 {% set ucx_version = "1.14.0" %}
-{% set number = "1" %}
+{% set number = "2" %}
 
 
 package:
@@ -38,8 +38,8 @@ outputs:
         - libnuma
       run:
       run_constrained:
-        - cudatoolkit {{ cuda_compiler_version }}  # [cuda_compiler_version not in ("None", "11.2")]
-        - cudatoolkit >=11.2,<12                   # [cuda_compiler_version == "11.2"]
+        - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version not in ("None", "11.2")]
+        - cudatoolkit >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
     script: install_ucx.sh
     test:
       commands:
