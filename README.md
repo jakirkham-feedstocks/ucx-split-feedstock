@@ -67,13 +67,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version12cdt_namecos6cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version12cdt_namecos6cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_64_c_compiler_version12cdt_namecos7cuda_compilercuda-nvcccuda_compiler_version12.0cxx_compiler_version12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
@@ -109,13 +102,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_ppc64le_c_compiler_version10cuda_compilercuda-nvcccuda_compiler_version12.0cxx_compiler_version10</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
@@ -127,13 +113,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7481&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/ucx-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12" alt="variant">
                 </a>
               </td>
             </tr>
