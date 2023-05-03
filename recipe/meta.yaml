@@ -28,7 +28,7 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - {{ compiler("cuda") }}         # [cuda_compiler_version != "12.0"]
+        - {{ compiler("cuda") }}
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
         - cuda-cudart ={{ cuda_compiler_version }}         # [cuda_compiler_version == "12.0"]
