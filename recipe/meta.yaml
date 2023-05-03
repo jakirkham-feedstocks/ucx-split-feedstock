@@ -12,7 +12,7 @@ source:
     - cuda12.patch
 
 build:
-  skip: true  # [not linux]
+  skip: true  # [not linux or cuda_compiler_version == "None"]
   number: {{ number }}
 
 outputs:
