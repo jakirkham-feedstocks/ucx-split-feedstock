@@ -36,7 +36,7 @@ outputs:
         - pkg-config
       host:
         - libnuma
-        - rdma-core  # [cuda_compiler_version != "10.2"]
+        - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
       run:
       run_constrained:
         - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version not in ("None", "11.2")]
