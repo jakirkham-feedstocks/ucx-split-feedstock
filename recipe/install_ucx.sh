@@ -19,6 +19,8 @@ fi
     --enable-cma \
     --enable-mt \
     --enable-numa \
+    --with-rdmacm=${PREFIX} \
+    --with-verbs=${PREFIX} \
     --with-gnu-ld \
     ${EXTRA_ARGS} || { cat config.log; exit 1; }
 

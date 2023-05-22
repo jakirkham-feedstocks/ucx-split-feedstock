@@ -1,5 +1,5 @@
 {% set ucx_version = "1.14.1" %}
-{% set number = "0" %}
+{% set number = "1" %}
 
 
 package:
@@ -34,8 +34,10 @@ outputs:
         - libtool
         - make
         - pkg-config
+        - rdma-core =28.*  # Use version 28.* to supports MOFED 5.0.x and above
       host:
         - libnuma
+        - rdma-core =28.*  # Use version 28.* to supports MOFED 5.0.x and above
       run:
       run_constrained:
         - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version not in ("None", "11.2")]
