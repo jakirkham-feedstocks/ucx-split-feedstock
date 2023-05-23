@@ -1,2 +1,1 @@
 numactl-devel
-rdma-core-devel

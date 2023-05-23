@@ -7,8 +7,9 @@ if [ "${cuda_compiler_version}" != "None" ]; then
     EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
 
-
-# --with-rdmacm requires rdma-core v23+, while CentOS 7 only offers v22.
+if [ "${cuda_compiler_version}" != "10.2" ] && [ "${target_platform}" == "linux-64" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --with-rdmacm=${PREFIX} --with-verbs=${PREFIX}"
+fi
 
 ./autogen.sh
 ./contrib/configure-release \
