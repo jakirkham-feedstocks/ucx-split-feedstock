@@ -40,6 +40,10 @@ outputs:
         - libnuma
         - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
       run:
+      run_constrained:
+        - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version not in ("None", "11.2", "12.0")]
+        - cudatoolkit >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
+
     script: install_ucx.sh
     test:
       commands:
