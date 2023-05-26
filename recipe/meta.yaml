@@ -29,7 +29,6 @@ outputs:
         - {{ compiler("cuda") }}
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
-        - cuda-driver-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
         - automake
         - autoconf
@@ -37,9 +36,6 @@ outputs:
         - make
         - pkg-config
       host:
-        - {{ compiler("c") }}
-        - {{ compiler("cxx") }}
-        - cuda-driver-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
         - libnuma
         - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
