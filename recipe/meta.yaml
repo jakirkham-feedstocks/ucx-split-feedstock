@@ -29,7 +29,6 @@ outputs:
         - {{ compiler("cuda") }}
         - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
         - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
-        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
         - automake
         - autoconf
         - libtool
@@ -41,8 +40,9 @@ outputs:
         - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
       run:
       run_constrained:
-        - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version not in ("None", "11.2", "12.0")]
-        - cudatoolkit >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
+        - cuda-version {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version in ("10.2", "11.0", "11.1")]
+        - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
+        - cuda-version >=12,<13                                                   # [cuda_compiler_version == "12.0"]
 
     script: install_ucx.sh
     test:
