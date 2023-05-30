@@ -35,6 +35,7 @@ outputs:
         - make
         - pkg-config
       host:
+        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
         - libnuma
         - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
