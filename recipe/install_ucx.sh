@@ -3,8 +3,11 @@
 set -xeuo pipefail
 
 EXTRA_ARGS=""
-if [ "${cuda_compiler_version}" != "None" ]; then
-    EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
+
+if [[ "${cuda_compiler_version}" =~ 12.* ]]; then
+  EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${PREFIX}"
+elif [[ "${cuda_compiler_version}" != "None" ]]; then
+  EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
 
 if [ "${cuda_compiler_version}" != "10.2" ] && [ "${target_platform}" == "linux-64" ]; then
