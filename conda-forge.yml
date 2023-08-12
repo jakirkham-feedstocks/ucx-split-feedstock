@@ -1,3 +1,7 @@
+azure:
+  store_build_artifacts: true
+conda_build:
+  pkg_format: '2'
 conda_forge_output_validation: true
 github:
   branch_name: main
@@ -5,7 +9,3 @@ github:
 provider:
   linux_aarch64: default
   linux_ppc64le: default
-conda_build:
-  pkg_format: '2'
-azure:
-  store_build_artifacts: True
