@@ -38,10 +38,9 @@ outputs:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
         - libnuma
-        - rdma-core  # [linux64 and cuda_compiler_version != "10.2"]
+        - rdma-core  # [linux64]
       run:
       run_constrained:
-        - cuda-version {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*  # [cuda_compiler_version in ("10.2", "11.0", "11.1")]
         - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
         - cuda-version >=12,<13                                                   # [cuda_compiler_version == "12.0"]
 
