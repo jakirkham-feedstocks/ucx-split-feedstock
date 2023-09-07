@@ -1,5 +1,5 @@
 {% set ucx_version = "1.14.1" %}
-{% set number = "3" %}
+{% set number = "4" %}
 
 
 package:
@@ -35,14 +35,14 @@ outputs:
         - make
         - pkg-config
       host:
-        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
-        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
+        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
         - libnuma
         - rdma-core  # [linux64]
       run:
       run_constrained:
-        - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.8"]
-        - cuda-version >=12,<13                                                   # [cuda_compiler_version == "12.0"]
+        - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
+        - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
 
     script: install_ucx.sh
     test:
