@@ -41,7 +41,7 @@ outputs:
         - rdma-core  # [linux64]
       run:
       run_constrained:
-        - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
+        - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.8"]
         - cuda-version >=12,<13                                                   # [cuda_compiler_version == "12.0"]
 
     script: install_ucx.sh
