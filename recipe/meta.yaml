@@ -1,5 +1,5 @@
 {% set ucx_version = "1.14.1" %}
-{% set number = "4" %}
+{% set number = "5" %}
 
 
 package:
@@ -10,7 +10,7 @@ source:
   sha256: e7e82d5812261b5a38f0ba72921b6e0c392f04e2663e740cccbbe11f691880ea
 
 build:
-  skip: true  # [not linux or cuda_compiler_version == "None"]
+  skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
   number: {{ number }}
 
 outputs:
