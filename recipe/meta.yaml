@@ -1,5 +1,5 @@
-{% set ucx_version = "1.14.1" %}
-{% set number = "5" %}
+{% set ucx_version = "1.15.0" %}
+{% set number = "0" %}
 
 
 package:
