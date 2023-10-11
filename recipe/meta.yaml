@@ -20,7 +20,6 @@ outputs:
       number: {{ number }}
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
-        - rdma-core>=48  # [linux64]
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
     requirements:
@@ -41,6 +40,7 @@ outputs:
         - libnuma
         - rdma-core  # [linux64]
       run:
+        - rdma-core >={{ rdma_core }}  # [linux64]
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
