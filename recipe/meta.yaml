@@ -20,6 +20,8 @@ outputs:
       number: {{ number }}
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
+      ignore_run_exports:
+        - rdma-core
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
     requirements:
