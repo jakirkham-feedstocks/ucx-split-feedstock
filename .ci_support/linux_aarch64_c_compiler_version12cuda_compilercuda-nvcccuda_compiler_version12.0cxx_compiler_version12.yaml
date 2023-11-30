@@ -22,10 +22,12 @@ cxx_compiler_version:
 - '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64
+rdma_core:
+- '48.0'
 target_platform:
 - linux-aarch64
 ucx:
-- 1.14.0
+- 1.15.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
