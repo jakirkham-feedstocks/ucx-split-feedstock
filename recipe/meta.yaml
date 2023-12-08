@@ -1,5 +1,5 @@
-{% set ucx_version = "1.14.1" %}
-{% set number = 4 %}
+{% set ucx_version = "1.15.0" %}
+{% set number = "2" %}
 
 
 package:
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
-  sha256: e7e82d5812261b5a38f0ba72921b6e0c392f04e2663e740cccbbe11f691880ea
+  sha256: e3082101dd61b2482390e7917b390f0fe9ecf399a839d97ee025ee559e6cb12d
 
 build:
-  skip: true  # [not linux or cuda_compiler_version == "None"]
+  skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
   number: {{ number }}
 
 outputs:
@@ -20,6 +20,8 @@ outputs:
       number: {{ number }}
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
+      ignore_run_exports:
+        - rdma-core
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
     requirements:
@@ -35,14 +37,15 @@ outputs:
         - make
         - pkg-config
       host:
-        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [cuda_compiler_version == "12.0"]
-        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [cuda_compiler_version == "12.0"]
+        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
         - libnuma
         - rdma-core  # [linux64]
       run:
+        - rdma-core >={{ rdma_core }}  # [linux64]
       run_constrained:
-        - cuda-version >=11.2,<12                                                 # [cuda_compiler_version == "11.2"]
-        - cuda-version >=12,<13                                                   # [cuda_compiler_version == "12.0"]
+        - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
+        - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
 
     script: install_ucx.sh
     test:
