@@ -19,7 +19,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-cuda:11.8
 rdma_core:
-- '48.0'
+- '49'
 target_platform:
 - linux-64
 ucx:
