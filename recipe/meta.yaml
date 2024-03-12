@@ -35,7 +35,7 @@ outputs:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
         - libnuma
-        - rdma-core  # [linux64]
+        - rdma-core
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
