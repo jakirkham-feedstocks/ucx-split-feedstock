@@ -32,7 +32,6 @@ outputs:
       host:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
-        - libnl
         - libnuma
         - rdma-core
       run_constrained:
