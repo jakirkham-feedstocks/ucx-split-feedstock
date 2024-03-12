@@ -9,7 +9,7 @@ source:
 
 build:
   skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
-  number: 5
+  number: 6
 
 outputs:
   - name: ucx
@@ -17,8 +17,6 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
-      ignore_run_exports:
-        - rdma-core
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
     requirements:
@@ -37,9 +35,7 @@ outputs:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
         - libnuma
-        - rdma-core  # [linux64]
-      run:
-        - rdma-core >={{ rdma_core }}  # [linux64]
+        - rdma-core
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
