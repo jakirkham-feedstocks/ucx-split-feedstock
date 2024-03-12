@@ -29,8 +29,6 @@ outputs:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
-        - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
-        - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
         - automake
         - autoconf
         - libtool
@@ -39,6 +37,7 @@ outputs:
       host:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
+        - libnl
         - libnuma
         - rdma-core  # [linux64]
       run:
