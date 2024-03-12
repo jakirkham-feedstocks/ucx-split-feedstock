@@ -20,6 +20,7 @@ fi
     --host="${HOST}" \
     --prefix="${PREFIX}" \
     --with-sysroot \
+    --disable-static \
     --enable-cma \
     --enable-mt \
     --enable-numa \
