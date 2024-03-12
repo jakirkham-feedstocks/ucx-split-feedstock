@@ -232,6 +232,3 @@ Feedstock Maintainers
 * [@matthiasdiener](https://github.com/matthiasdiener/)
 * [@quasiben](https://github.com/quasiben/)
 
-
-<!-- dummy commit to enable rerendering -->
-
