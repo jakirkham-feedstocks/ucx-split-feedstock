@@ -18,8 +18,6 @@ cxx_compiler_version:
 - '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-ppc64le
-rdma_core:
-- '50'
 target_platform:
 - linux-ppc64le
 ucx:
