@@ -1,6 +1,4 @@
 {% set ucx_version = "1.15.0" %}
-{% set number = "5" %}
-
 
 package:
   name: ucx-split
@@ -11,13 +9,12 @@ source:
 
 build:
   skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
-  number: {{ number }}
+  number: 6
 
 outputs:
   - name: ucx
     version: {{ ucx_version }}
     build:
-      number: {{ number }}
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
       ignore_run_exports_from:
@@ -46,6 +43,14 @@ outputs:
     script: install_ucx.sh
     test:
       commands:
+        - test -f "${PREFIX}/lib/libucp${SHLIB_EXT}"
+        - test ! -f "${PREFIX}/lib/libucp.a"
+        - test -f "${PREFIX}/lib/libucm${SHLIB_EXT}"
+        - test ! -f "${PREFIX}/lib/libucm.a"
+        - test -f "${PREFIX}/lib/libucs${SHLIB_EXT}"
+        - test ! -f "${PREFIX}/lib/libucs.a"
+        - test -f "${PREFIX}/lib/libuct${SHLIB_EXT}"
+        - test ! -f "${PREFIX}/lib/libuct.a"
         - test -f "${PREFIX}/bin/ucx_info"
         # Requires driver for GPU test.
         # Crashes qemu on ppc64le.
@@ -76,3 +81,4 @@ extra:
     - TomAugspurger
     - leofang
     - matthiasdiener
+    - xhochy
