@@ -23,7 +23,6 @@ fi
     --disable-static \
     --enable-cma \
     --enable-mt \
-    --enable-numa \
     --with-gnu-ld \
     ${EXTRA_ARGS} || { cat config.log; exit 1; }
 
