@@ -9,7 +9,7 @@ source:
 
 build:
   skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
-  number: 6
+  number: 7
 
 outputs:
   - name: ucx
@@ -24,8 +24,6 @@ outputs:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
-        - {{ cdt("libnl") }}             # [cdt_name == "cos6"]
-        - {{ cdt("libnl3") }}            # [cdt_name == "cos7"]
         - automake
         - autoconf
         - libtool
@@ -34,7 +32,6 @@ outputs:
       host:
         - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
         - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
-        - libnuma
         - rdma-core
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]

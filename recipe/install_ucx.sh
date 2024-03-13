@@ -2,16 +2,12 @@
 
 set -xeuo pipefail
 
-EXTRA_ARGS=""
+EXTRA_ARGS=" --with-rdmacm=${PREFIX} --with-verbs=${PREFIX}"
 
 if [[ "${cuda_compiler_version}" =~ 12.* ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${PREFIX}"
 elif [[ "${cuda_compiler_version}" != "None" ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
-fi
-
-if [ "${target_platform}" == "linux-64" ]; then
-    EXTRA_ARGS="${EXTRA_ARGS} --with-rdmacm=${PREFIX} --with-verbs=${PREFIX}"
 fi
 
 ./autogen.sh
@@ -23,7 +19,6 @@ fi
     --disable-static \
     --enable-cma \
     --enable-mt \
-    --enable-numa \
     --with-gnu-ld \
     ${EXTRA_ARGS} || { cat config.log; exit 1; }
 
