@@ -1,10 +1,10 @@
-{% set ucx_version = "1.16.0" %}
+{% set version = "1.16.0" %}
 
 package:
   name: ucx-split
 
 source:
-  url: https://github.com/openucx/ucx/archive/v{{ ucx_version }}.tar.gz
+  url: https://github.com/openucx/ucx/archive/v{{ version }}.tar.gz
   sha256: bf1c1ce6583ea1ab805feceb000157dc1fb825a60ddac0fbd9a329a010f9ad72
 
 build:
@@ -13,7 +13,7 @@ build:
 
 outputs:
   - name: ucx
-    version: {{ ucx_version }}
+    version: {{ version }}
     build:
       run_exports:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
