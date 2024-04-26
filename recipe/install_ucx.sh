@@ -25,3 +25,7 @@ fi
 
 make -j${CPU_COUNT}
 make install
+
+POST_LINK=$PREFIX/bin/.ucx-post-link.sh
+cat $RECIPE_DIR/post-link-cudart.sh >> $POST_LINK
+chmod +x $POST_LINK
