@@ -22,12 +22,15 @@ outputs:
       ignore_run_exports:
         - cuda-cudart  # [(cuda_compiler_version or "None").startswith("12")]
       missing_dso_whitelist:
-        - "*libcudart.so*"  # [(cuda_compiler_version or "None").startswith("11")]
+        - "*libcuda.so*"
+        - "*libcudart.so*"
+        - "*libnvidia-ml.so*"
     requirements:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
+        - libgomp
         - automake
         - autoconf
         - libtool
