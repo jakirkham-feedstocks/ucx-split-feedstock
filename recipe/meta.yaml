@@ -75,8 +75,6 @@ about:
   summary: Unified Communication X.
   dev_url: https://github.com/openucx/ucx
   doc_url: https://openucx.readthedocs.io/
-  prelink_message:
-    - cudart.txt
 
 extra:
   recipe-maintainers:
