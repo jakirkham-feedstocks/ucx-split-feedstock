@@ -21,6 +21,8 @@ outputs:
         - {{ compiler("cuda") }}
       ignore_run_exports:
         - cuda-cudart  # [(cuda_compiler_version or "None").startswith("12")]
+      missing_dso_whitelist:
+        - *libcudart.so*  # [(cuda_compiler_version or "None").startswith("11")]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -38,6 +40,8 @@ outputs:
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
+        - cudatoolkit              # [(cuda_compiler_version or "None").startswith("11")]
+        - cuda-cudart              # [(cuda_compiler_version or "None").startswith("12")]
 
     script: install_ucx.sh
     test:
@@ -71,6 +75,8 @@ about:
   summary: Unified Communication X.
   dev_url: https://github.com/openucx/ucx
   doc_url: https://openucx.readthedocs.io/
+  prelink_message:
+    - cudart.txt
 
 extra:
   recipe-maintainers:
