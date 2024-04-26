@@ -22,7 +22,7 @@ outputs:
       ignore_run_exports:
         - cuda-cudart  # [(cuda_compiler_version or "None").startswith("12")]
       missing_dso_whitelist:
-        - *libcudart.so*  # [(cuda_compiler_version or "None").startswith("11")]
+        - "*libcudart.so*"  # [(cuda_compiler_version or "None").startswith("11")]
     requirements:
       build:
         - {{ compiler("c") }}
