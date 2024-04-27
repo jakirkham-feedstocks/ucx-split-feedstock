@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF >> $PREFIX/.messages.txt
+cat << EOF >> "${PREFIX}/.messages.txt"
 
 To enable CUDA support, UCX requires the CUDA Runtime library (libcudart).
 The library can be installed with the appropriate command below:
