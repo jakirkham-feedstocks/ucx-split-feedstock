@@ -17,6 +17,7 @@ fi
     --prefix="${PREFIX}" \
     --with-sysroot \
     --disable-static \
+    --disable-openmp \
     --enable-cma \
     --enable-mt \
     --with-gnu-ld \
