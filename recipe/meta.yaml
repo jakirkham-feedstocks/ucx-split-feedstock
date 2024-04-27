@@ -38,8 +38,9 @@ outputs:
         - make
         - pkg-config
       host:
-        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
-        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-version {{ cuda_compiler_version }}
+        - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-nvml-dev            # [(cuda_compiler_version or "None").startswith("12")]
         - rdma-core
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
