@@ -34,6 +34,7 @@ outputs:
         - libtool
         - make
         - pkg-config
+        - libgomp
       host:
         - cuda-version {{ cuda_compiler_version }}
         - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
