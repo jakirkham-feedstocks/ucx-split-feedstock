@@ -19,9 +19,7 @@ outputs:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
-      ignore_run_exports:
-        - cudatoolkit  # [(cuda_compiler_version or "None").startswith("11")]
-        - cuda-cudart  # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
       missing_dso_whitelist:
         - "*libcuda.so*"
         - "*libcudart.so*"
