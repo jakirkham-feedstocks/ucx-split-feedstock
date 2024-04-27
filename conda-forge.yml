@@ -1,6 +1,7 @@
 azure:
   store_build_artifacts: true
 conda_build:
+  error_overlinking: true
   pkg_format: '2'
 conda_forge_output_validation: true
 github:
