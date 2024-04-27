@@ -29,7 +29,6 @@ outputs:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
-        - libgomp
         - automake
         - autoconf
         - libtool
