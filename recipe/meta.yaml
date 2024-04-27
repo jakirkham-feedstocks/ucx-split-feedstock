@@ -57,9 +57,7 @@ outputs:
         - test -f "${PREFIX}/lib/libuct${SHLIB_EXT}"
         - test ! -f "${PREFIX}/lib/libuct.a"
         - test -f "${PREFIX}/bin/ucx_info"
-        # Requires driver for GPU test.
-        # Crashes qemu on ppc64le.
-        - ${PREFIX}/bin/ucx_info -v         # [cuda_compiler_version == "None" and not ppc64le]
+        - ucx_info -v
     about:
       home: https://openucx.org
       license: BSD-3-Clause
