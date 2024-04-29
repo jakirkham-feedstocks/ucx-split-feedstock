@@ -43,6 +43,9 @@ outputs:
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
+        # The actual version constraint comes from cuda-version, so below we explicit list
+        # them only to codify that these are expected (but optional) dependencies when CUDA
+        # is in use.
         - cudatoolkit              # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-cudart              # [(cuda_compiler_version or "None").startswith("12")]
 
