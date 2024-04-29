@@ -26,8 +26,6 @@ rdma_core:
 - '51'
 target_platform:
 - linux-64
-ucx:
-- 1.15.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version

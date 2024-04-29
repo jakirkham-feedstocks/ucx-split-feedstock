@@ -17,6 +17,7 @@ fi
     --prefix="${PREFIX}" \
     --with-sysroot \
     --disable-static \
+    --enable-openmp \
     --enable-cma \
     --enable-mt \
     --with-gnu-ld \
@@ -25,3 +26,5 @@ fi
 
 make -j${CPU_COUNT}
 make install
+
+cp "${RECIPE_DIR}/ucx-post-link.sh" "${PREFIX}/bin/.ucx-post-link.sh"

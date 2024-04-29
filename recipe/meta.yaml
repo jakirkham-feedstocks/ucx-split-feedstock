@@ -9,7 +9,7 @@ source:
 
 build:
   skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
-  number: 1
+  number: 2
 
 outputs:
   - name: ucx
@@ -19,6 +19,11 @@ outputs:
         - {{ pin_subpackage("ucx", max_pin="x.x") }}
       ignore_run_exports_from:
         - {{ compiler("cuda") }}
+        - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+      missing_dso_whitelist:
+        - "*libcuda.so*"
+        - "*libcudart.so*"
+        - "*libnvidia-ml.so*"
     requirements:
       build:
         - {{ compiler("c") }}
@@ -29,13 +34,20 @@ outputs:
         - libtool
         - make
         - pkg-config
+        - libgomp
       host:
-        - cuda-cudart-dev ={{ cuda_compiler_version }}     # [(cuda_compiler_version or "None").startswith("12")]
-        - cuda-nvml-dev ={{ cuda_compiler_version }}       # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-version {{ cuda_compiler_version }}
+        - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]
+        - cuda-nvml-dev            # [(cuda_compiler_version or "None").startswith("12")]
         - rdma-core
       run_constrained:
         - cuda-version >=11.2,<12  # [(cuda_compiler_version or "None").startswith("11")]
         - cuda-version >=12,<13    # [(cuda_compiler_version or "None").startswith("12")]
+        # The actual version constraint comes from cuda-version, so below we explicit list
+        # them only to codify that these are expected (but optional) dependencies when CUDA
+        # is in use.
+        - cudatoolkit              # [(cuda_compiler_version or "None").startswith("11")]
+        - cuda-cudart              # [(cuda_compiler_version or "None").startswith("12")]
 
     script: install_ucx.sh
     test:
@@ -48,10 +60,10 @@ outputs:
         - test ! -f "${PREFIX}/lib/libucs.a"
         - test -f "${PREFIX}/lib/libuct${SHLIB_EXT}"
         - test ! -f "${PREFIX}/lib/libuct.a"
+        - test -f "${PREFIX}/bin/.ucx-post-link.sh"
         - test -f "${PREFIX}/bin/ucx_info"
-        # Requires driver for GPU test.
-        # Crashes qemu on ppc64le.
-        - ${PREFIX}/bin/ucx_info -v         # [cuda_compiler_version == "None" and not ppc64le]
+        # Fails on ppc64le
+        - ucx_info -v  # [not ppc64le]
     about:
       home: https://openucx.org
       license: BSD-3-Clause
