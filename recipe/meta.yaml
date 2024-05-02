@@ -26,6 +26,7 @@ outputs:
         - "*libnvidia-ml.so*"
     requirements:
       build:
+        - {{ stdlib("c") }}
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
