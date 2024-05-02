@@ -6,6 +6,12 @@ package:
 source:
   url: https://github.com/openucx/ucx/archive/v{{ version }}.tar.gz
   sha256: bf1c1ce6583ea1ab805feceb000157dc1fb825a60ddac0fbd9a329a010f9ad72
+  patches:
+    ###################################################
+    # Fix disabled OpenMP build                       #
+    # xref: https://github.com/openucx/ucx/pull/9850  #
+    ###################################################
+    - patches/PR_9850.patch
 
 build:
   skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
@@ -34,7 +40,6 @@ outputs:
         - libtool
         - make
         - pkg-config
-        - libgomp
       host:
         - cuda-version {{ cuda_compiler_version }}
         - cuda-cudart-dev          # [(cuda_compiler_version or "None").startswith("12")]

@@ -1,0 +1,237 @@
+From bcac522e871e9c4cea9dfc73b250180755caacd0 Mon Sep 17 00:00:00 2001
+From: Yossi Itigin <yosefe@nvidia.com>
+Date: Sun, 28 Apr 2024 10:53:24 +0300
+Subject: [PATCH] TOOLS/PERF/TEST: Fix build without openmp
+
+---
+ buildlib/tools/builds.sh          | 78 ++++++++++++++++---------------
+ src/tools/perf/lib/libperf.c      | 17 +++----
+ src/tools/perf/mad/perftest_mad.c | 10 ++--
+ src/tools/perf/perftest.c         | 12 +++--
+ test/apps/test_init_mt.c          | 12 +++--
+ 5 files changed, 73 insertions(+), 56 deletions(-)
+
+diff --git a/buildlib/tools/builds.sh b/buildlib/tools/builds.sh
+index 26af35f3d51..e0f7dc25e05 100755
+--- a/buildlib/tools/builds.sh
++++ b/buildlib/tools/builds.sh
+@@ -303,6 +303,10 @@ build_no_devx() {
+ 	build_gcc --with-devx=no
+ }
+ 
++build_no_openmp() {
++	build_gcc --disable-openmp
++}
++
+ build_gcc_debug_opt() {
+ 	build_gcc CFLAGS=-Og CXXFLAGS=-Og
+ }
+@@ -408,47 +412,45 @@ build_fuse() {
+ 	fi
+ }
+ 
+-#
+-# Do a given task and update progress indicator
+-#
+-do_task() {
+-	amount=$1
+-	shift
+-	# cleanup build dir before the task
+-	[ -n "${ucx_build_dir}" ] && rm -rf ${ucx_build_dir}/*
+-
+-	$@
+-
+-	echo "##vso[task.setprogress value=$PROGRESS;]Progress Indicator"
+-	PROGRESS=$((PROGRESS+amount))
+-}
+-
+-
+ az_init_modules
+ prepare_build
+ 
+-[ "${long_test}" = "yes" ] && prog=5 || prog=12
+-
+-do_task "${prog}" build_docs
+-do_task "${prog}" build_debug
+-do_task "${prog}" build_prof
+-do_task "${prog}" build_ugni
+-do_task "${prog}" build_cuda
+-do_task "${prog}" build_rocm
+-do_task "${prog}" build_no_verbs
+-do_task "${prog}" build_release_pkg
+-do_task "${prog}" build_cmake_examples
+-do_task "${prog}" build_fuse
+-
++tests=('build_docs' \
++		'build_debug' \
++		'build_prof' \
++		'build_ugni' \
++		'build_cuda' \
++		'build_rocm' \
++		'build_no_verbs' \
++		'build_release_pkg' \
++		'build_cmake_examples' \
++		'build_fuse')
+ if [ "${long_test}" = "yes" ]
+ then
+-	do_task 5 check_config_h
+-	do_task 5 check_inst_headers
+-	do_task 10 build_icc
+-	do_task 10 build_pgi
+-	do_task 10 build_gcc
+-	do_task 8 build_no_devx
+-	do_task 10 build_gcc_debug_opt
+-	do_task 10 build_clang
+-	do_task 10 build_armclang
++	tests+=('check_config_h' \
++			'check_inst_headers' \
++			'build_icc'\
++			'build_pgi' \
++			'build_gcc' \
++			'build_no_devx' \
++			'build_no_openmp' \
++			'build_gcc_debug_opt' \
++			'build_clang' \
++			'build_armclang')
+ fi
++
++num_tests=${#tests[@]}
++for ((i=0;i<${num_tests};++i))
++do
++	test_name=${tests[$i]}
++
++	# update progress indicator
++	progress=$(( (i * 100) / num_tests ))
++	echo "##vso[task.setprogress value=${progress};]${test_name}"
++
++	# cleanup build dir before the task
++	[ -d "${ucx_build_dir}" ] && rm -rf ${ucx_build_dir}/*
++
++	# run the test
++	${test_name}
++done
+diff --git a/src/tools/perf/lib/libperf.c b/src/tools/perf/lib/libperf.c
+index 26587d571fe..f23a4342f7e 100644
+--- a/src/tools/perf/lib/libperf.c
++++ b/src/tools/perf/lib/libperf.c
+@@ -1696,16 +1696,17 @@ ucx_perf_do_warmup(ucx_perf_context_t *perf, const ucx_perf_params_t *params)
+         /* Stop when reaching the deadline */
+         stop_status = (ucs_get_time() > deadline) ? UCS_OK : UCS_INPROGRESS;
+ 
+-        if (params->thread_count == 1) {
+-            status = ucx_perf_test_exchange_status(perf, stop_status);
+-        } else {
+-#pragma omp barrier
+-#pragma omp single copyprivate(status)
+-            /* Synchronize on whether to continue or stop the warmup phase */
++        /* Synchronize on whether to continue or stop the warmup phase */
++#if _OPENMP
++#  pragma omp barrier
++#  pragma omp single copyprivate(status)
++#endif
++        {
+             status = ucx_perf_test_exchange_status(perf, stop_status);
+-#pragma omp barrier
+         }
+-
++#if _OPENMP
++#  pragma omp barrier
++#endif
+         if (status != UCS_INPROGRESS) {
+             return status;
+         }
+diff --git a/src/tools/perf/mad/perftest_mad.c b/src/tools/perf/mad/perftest_mad.c
+index 9b997b67d85..ef7cad66770 100644
+--- a/src/tools/perf/mad/perftest_mad.c
++++ b/src/tools/perf/mad/perftest_mad.c
+@@ -316,8 +316,10 @@ static ucs_status_t perftest_mad_barrier(perftest_mad_rte_group_t *group)
+     ucs_status_t status = UCS_OK;
+     unsigned value;
+ 
+-#pragma omp barrier
+-#pragma omp single copyprivate(status)
++#if _OPENMP
++#  pragma omp barrier
++#  pragma omp single copyprivate(status)
++#endif
+     {
+         value = ++mad_magic;
+ 
+@@ -331,7 +333,9 @@ static ucs_status_t perftest_mad_barrier(perftest_mad_rte_group_t *group)
+ 
+         status = perftest_mad_recv_magic(group, ~value);
+     }
+-#pragma omp barrier
++#if _OPENMP
++#  pragma omp barrier
++#endif
+     return status;
+ }
+ 
+diff --git a/src/tools/perf/perftest.c b/src/tools/perf/perftest.c
+index 20fd1858b0b..7a794c44f5b 100644
+--- a/src/tools/perf/perftest.c
++++ b/src/tools/perf/perftest.c
+@@ -228,9 +228,10 @@ static unsigned sock_rte_group_index(void *rte_group)
+ static void sock_rte_barrier(void *rte_group, void (*progress)(void *arg),
+                              void *arg)
+ {
+-#pragma omp barrier
+-
+-#pragma omp master
++#if _OPENMP
++#  pragma omp barrier
++#  pragma omp master
++#endif
+   {
+     sock_rte_group_t *group = rte_group;
+ 
+@@ -251,7 +252,10 @@ static void sock_rte_barrier(void *rte_group, void (*progress)(void *arg),
+         }
+     }
+   }
+-#pragma omp barrier
++
++#if _OPENMP
++#  pragma omp barrier
++#endif
+ }
+ 
+ static void sock_rte_post_vec(void *rte_group, const struct iovec *iovec,
+diff --git a/test/apps/test_init_mt.c b/test/apps/test_init_mt.c
+index be3e5707b93..22778dfd756 100644
+--- a/test/apps/test_init_mt.c
++++ b/test/apps/test_init_mt.c
+@@ -28,7 +28,9 @@ int main(int argc, char **argv)
+     printf("starting test [%ld.%06ld] .. ", start.tv_sec, start.tv_usec);
+     fflush(stdout);
+ 
+-#pragma omp parallel
++#if _OPENMP
++#  pragma omp parallel
++#endif
+     {
+         ucs_status_t ctx_status, worker_status;
+         ucp_context_h context;
+@@ -47,7 +49,9 @@ int main(int argc, char **argv)
+             }
+         }
+ 
+-#pragma omp barrier
++#if _OPENMP
++#  pragma omp barrier
++#endif
+ 
+         if (ctx_status == UCS_OK) {
+             if (worker_status == UCS_OK) {
+@@ -57,7 +61,9 @@ int main(int argc, char **argv)
+         }
+     }
+ 
+-#pragma omp barrier
++#if _OPENMP
++#  pragma omp barrier
++#endif
+ 
+     gettimeofday(&finish, NULL);
+     printf("[%ld.%06ld] finished %d threads\n",
