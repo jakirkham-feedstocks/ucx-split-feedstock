@@ -8,8 +8,8 @@ source:
   sha256: bf1c1ce6583ea1ab805feceb000157dc1fb825a60ddac0fbd9a329a010f9ad72
 
 build:
-  skip: true  # [not linux or cuda_compiler_version in ("None", "11.2")]
-  number: 2
+  skip: true  # [not linux or cuda_compiler_version == "None"]
+  number: 3
 
 outputs:
   - name: ucx
@@ -26,6 +26,7 @@ outputs:
         - "*libnvidia-ml.so*"
     requirements:
       build:
+        - {{ stdlib("c") }}
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("cuda") }}
