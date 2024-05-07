@@ -1,6 +1,10 @@
 azure:
   free_disk_space: true
   store_build_artifacts: true
+bot:
+  version_updates:
+    exclude:
+      - '43'
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64

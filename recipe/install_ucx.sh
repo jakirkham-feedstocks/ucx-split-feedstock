@@ -10,7 +10,6 @@ elif [[ "${cuda_compiler_version}" != "None" ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
 
-./autogen.sh
 ./contrib/configure-release \
     --build="${BUILD}" \
     --host="${HOST}" \
