@@ -7,6 +7,16 @@ EXTRA_ARGS=" --with-rdmacm=${PREFIX} --with-verbs=${PREFIX}"
 if [[ "${cuda_compiler_version}" =~ 12.* ]]; then
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${PREFIX}"
 elif [[ "${cuda_compiler_version}" != "None" ]]; then
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" == "1" ]]; then
+    if [[ "${target_platform}" == "linux-aarch64" ]]; then
+        CUDA_HOME="${CUDA_HOME}/targets/sbsa-linux"
+    elif [[ "${target_platform}" == "linux-ppc64le" ]]; then
+        CUDA_HOME="${CUDA_HOME}/targets/ppc64le-linux"
+    else
+        echo "Unsupported target_platform: ${target_platform}"
+        exit 1
+    fi
+  fi
   EXTRA_ARGS="${EXTRA_ARGS} --with-cuda=${CUDA_HOME}"
 fi
 
