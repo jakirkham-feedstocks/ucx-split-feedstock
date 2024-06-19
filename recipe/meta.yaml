@@ -1,15 +1,15 @@
-{% set version = "1.16.0" %}
+{% set version = "1.17.0" %}
 
 package:
   name: ucx-split
 
 source:
   url: https://github.com/openucx/ucx/releases/download/v{{ version }}/ucx-{{ version }}.tar.gz
-  sha256: f73770d3b583c91aba5fb07557e655ead0786e057018bfe42f0ebe8716e9d28c
+  sha256: 34658e282f99f89ce7a991c542e9727552734ac6ad408c52f22b4c2653b04276
 
 build:
-  skip: true  # [not linux or cuda_compiler_version == "None"]
-  number: 5
+  skip: true  # [not (linux64 or aarch64) or cuda_compiler_version == "None"]
+  number: 0
 
 outputs:
   - name: ucx
