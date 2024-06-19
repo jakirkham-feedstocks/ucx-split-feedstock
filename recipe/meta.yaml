@@ -8,7 +8,7 @@ source:
   sha256: 34658e282f99f89ce7a991c542e9727552734ac6ad408c52f22b4c2653b04276
 
 build:
-  skip: true  # [not linux or cuda_compiler_version == "None"]
+  skip: true  # [not (linux64 or aarch64) or cuda_compiler_version == "None"]
   number: 0
 
 outputs:
