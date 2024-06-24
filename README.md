@@ -212,6 +212,3 @@ Feedstock Maintainers
 * [@quasiben](https://github.com/quasiben/)
 * [@xhochy](https://github.com/xhochy/)
 
-
-<!-- dummy commit to enable rerendering -->
-
