@@ -1,0 +1,21 @@
+From 020a53b7f974403d1704e34d898458bf1af76c9e Mon Sep 17 00:00:00 2001
+From: Thomas Vegas <tvegas@nvidia.com>
+Date: Mon, 24 Jun 2024 16:52:04 +0300
+Subject: [PATCH] UCS/TIME: Add math.h to provide INFINITY
+
+---
+ src/ucs/time/time.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/ucs/time/time.h b/src/ucs/time/time.h
+index cff9810cdad..c51362273f8 100644
+--- a/src/ucs/time/time.h
++++ b/src/ucs/time/time.h
+@@ -11,6 +11,7 @@
+ #include <ucs/time/time_def.h>
+ #include <sys/time.h>
+ #include <limits.h>
++#include <math.h>
+ 
+ BEGIN_C_DECLS
+ 

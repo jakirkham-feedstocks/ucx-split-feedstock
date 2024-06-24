@@ -6,6 +6,13 @@ package:
 source:
   url: https://github.com/openucx/ucx/releases/download/v{{ version }}/ucx-{{ version }}.tar.gz
   sha256: 34658e282f99f89ce7a991c542e9727552734ac6ad408c52f22b4c2653b04276
+  patches:
+    ################################################################
+    # Apply upstream patch to fix missing `INFINITY` in UCS time.  #
+    #                                                              #
+    # xref: https://github.com/openucx/ucx/pull/9973               #
+    ################################################################
+    - patches/PR_9973.patch
 
 build:
   skip: true  # [not linux or cuda_compiler_version == "None"]
